@@ -20,7 +20,7 @@ router.get("/profile/:id/request", async (req, res) => {
 
         // console.log(req.userId)
         // console.log(req.params.id)
-        if (req.params.id == req.userId) return res.status(400).json("you cant add yourself")
+        if (req.params.id == req.userId) return res.status(400).json("you can not add yourself")
 
         const newRequest = new Request({
             response_id: req.userId,
@@ -57,7 +57,7 @@ router.get("/profile/:requestId/accept", async (req, res) => {
 
 
     await User.findByIdAndUpdate(req.userId, { $addToSet: { friends: request.response_id } })
-    await User.findByIdAndUpdate(request.receive_id, { $addToSet: { friends: req.userId }, $pull: { request: request._id } })
+    await User.findByIdAndUpdate(request.response_id, { $addToSet: { friends: req.userId }, $pull: { request: request._id } })
 
 
     res.json("added friend")

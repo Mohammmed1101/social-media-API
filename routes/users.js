@@ -281,10 +281,10 @@ router.get("/profile", async (req, res) => {
             path: "receive",
             select: "-poster_id"
         }).populate("favourite").populate("following").populate("followers").populate({
-            path : "request"
-            , populate : "receive_id" ,
-            path : "request"
-            , populate : "response_id"
+            path: "request"
+            , populate: "receive_id",
+            path: "request"
+            , populate: "response_id"
         }).populate("friends").populate("posts")
         if (!user) return res.status(404).json("user not found")
         // console.log(user)
@@ -336,7 +336,7 @@ router.get("/profile/:username", async (req, res) => {
     //check username
     try {
         const username = req.params.username
-        
+
         const token = req.header("Authorization")
         // if (!token) return res.status(401).json("token is missing")
         if (token) {
@@ -363,7 +363,7 @@ router.get("/profile/:username", async (req, res) => {
 //follow
 router.get("/profile/:id/follow", async (req, res) => {
     try {
-       
+
 
         //check token 
         const token = req.header("Authorization")

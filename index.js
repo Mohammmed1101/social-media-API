@@ -16,7 +16,7 @@ const admins = require("./routes/admins")
 
 
 //connection Database
-mongoose.connect(`mongodb://localhost:27017/CapstoneDB`)
+mongoose.connect(`mongodb+srv://user1332Mood:${process.env.MONGO_PASSWORD_KEY}@cluster0.aiiku.mongodb.net/socialMediaDB?retryWrites=true&w=majority`)
   .then(() => console.log("connection"))
   .catch(error => console.log("fail connection" + error))
 

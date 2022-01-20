@@ -14,7 +14,7 @@ const messageSchema = new mongoose.Schema({
 })
 
 const messageJoi = (input) => Joi.object({
-    message : Joi.string().max(1000).required(),
+    message : Joi.string().min(1).max(1000).required(),
 }).validate(input)
 
 const Message = mongoose.model("Message" , messageSchema)

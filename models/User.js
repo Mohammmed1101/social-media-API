@@ -67,9 +67,9 @@ const userSchema = new mongoose.Schema({
 
 
 const signupJoi= (input) => Joi.object({
-    firstName : Joi.string().regex(/^[,. a-zA-Z]+$/).alphanum().min(3).max(50).required(),
-    lastName : Joi.string().regex(/^[,. a-zA-Z]+$/).alphanum().min(3).max(50).required(),
-    username : Joi.string().min(4).max(25).required(),
+    firstName : Joi.string().regex(/^[a-zA-Z]+$/).alphanum().min(3).max(50).required(),
+    lastName : Joi.string().regex(/^[a-zA-Z]+$/).alphanum().min(3).max(50).required(),
+    username : Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25).required(),
     email: Joi.string().email().required(),
     password: passwordComplexity({
         min: 8,
@@ -84,7 +84,7 @@ const signupJoi= (input) => Joi.object({
 
 
 const loginJoi =  (input) => Joi.object({
-    username : Joi.string().min(4).max(25),
+    username :Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25),
     email: Joi.string().email(),
     password:passwordComplexity({
         min: 8,
@@ -98,7 +98,7 @@ const loginJoi =  (input) => Joi.object({
 }).validate(input)
 
 const resetPassJoi= (input) => Joi.object({
-    username : Joi.string().min(4).max(25),
+    username : Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25),
     email: Joi.string().email(),
 }).validate(input)
 
@@ -106,7 +106,7 @@ const profileJoi= (input) => Joi.object({
     firstName : Joi.string().alphanum().min(3).max(50),
     lastName : Joi.string().alphanum().min(3).max(50),
     avatar : Joi.string().uri().max(1000),
-    username : Joi.string().min(4).max(25),
+    username : Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25),
     email: Joi.string().email(),
     password: passwordComplexity({
         min: 8,

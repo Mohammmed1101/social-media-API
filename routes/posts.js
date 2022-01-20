@@ -28,7 +28,7 @@ router.get("/posts/Private", async (req, res) => {
                 path: "owner",
             },
         })
-        const privatePost = posts.filter(post =>  post.owner._id== req.userId ||  post.owner.followers.includes(req.userId))
+        const privatePost = posts.filter(post =>  post.owner._id== req.userId ||  post.owner.followers.includes(req.userId) && post.owner.following.includes(req.userId))
         res.json(privatePost)
     } catch (error) {
         console.log(error.message)
@@ -114,7 +114,7 @@ router.post("/", async (req, res) => {
 
 
         await User.findByIdAndUpdate(req.userId, { $push: { posts: posts._id } })
-        //  await Post.findByIdAndUpdate(req.params.postId , { $push : {owner : req.userId}})
+    
 
         await posts.save()
         res.json(posts)
