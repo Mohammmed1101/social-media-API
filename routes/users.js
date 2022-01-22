@@ -15,6 +15,7 @@ router.post("/signup", async (req, res) => {
 
         //validate
         const result = signupJoi(req.body)
+
         // return res.json(result.error)
         if (result.error?.details[0].context.regex) return res.status(400).send(`${result.error.details[0].context.key} should be letters only`)
 
@@ -338,7 +339,7 @@ router.get("/profile/:username", async (req, res) => {
         const username = req.params.username
 
         const token = req.header("Authorization")
-        // if (!token) return res.status(401).json("token is missing")
+      
         if (token) {
             const decryptToken = jwt.verify(token, process.env.JWT_SECRET_KEY)
             const userId = decryptToken.id
@@ -351,7 +352,7 @@ router.get("/profile/:username", async (req, res) => {
         const isFollower = user.followers.find(f => f._id == req.userId)
         if ((!token || !isFollower) && req.userId != user._id) user._doc.posts = user._doc.posts.filter(p => p.type === 'Public')
 
-        // delete user._doc.posts
+       
         res.json(user)
     } catch (error) {
         console.log(error.message)

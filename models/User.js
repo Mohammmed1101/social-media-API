@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         default : false,
     }, 
     password:String,
-    comment : [{
+    comments : [{
         type : mongoose.Types.ObjectId , 
         ref : "Comment"
     }] , 
@@ -80,16 +80,16 @@ const signupJoi= (input) => Joi.object({
 
 
 const loginJoi =  (input) => Joi.object({
-    username :Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25),
+    username : Joi.string().regex(/^[a-zA-Z0-9._]+$/).min(4).max(25),
     email: Joi.string().email(),
-    password:passwordComplexity({
+    password: passwordComplexity({
         min: 8,
         max: 30,
         lowerCase: 1,
         upperCase: 1,
         numeric: 1,
         symbol: 1,
-        requirementCount: 2,
+        requirementCount: 3,
       })
 }).validate(input)
 
@@ -102,7 +102,7 @@ const profileJoi= (input) => Joi.object({
     firstName : Joi.string().alphanum().min(3).max(50),
     lastName : Joi.string().alphanum().min(3).max(50),
     avatar : Joi.string().uri().max(1000),
-    username : Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25),
+    username : Joi.string().regex(/^[a-zA-Z0-9._]+$/).min(4).max(25),
     email: Joi.string().email(),
     password: passwordComplexity({
         min: 8,
@@ -111,7 +111,7 @@ const profileJoi= (input) => Joi.object({
         upperCase: 1,
         numeric: 1,
         symbol: 1,
-        requirementCount: 2,
+        requirementCount: 3,
       })
 }).validate(input)
 

@@ -209,6 +209,7 @@ router.get("/:postId/likes", async (req, res) => {
         const user = await User.findById(userId).select("-password")
         if (!user) return res.status(404).json("user not found")
         req.userId = userId
+
         //check(validate) id
         const id = req.params.postId
         if (!mongoose.Types.ObjectId.isValid(id))
@@ -267,7 +268,7 @@ router.post("/:postId/comments", async (req, res) => {
         if (!user) return res.status(404).json("user not found")
 
 
-        //check(validate) id
+        //check id
         const id = req.params.postId
         if (!mongoose.Types.ObjectId.isValid(id))
             return res.status(400).send("The path is not valid object id")

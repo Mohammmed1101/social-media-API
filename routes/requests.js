@@ -40,7 +40,7 @@ router.get("/profile/:id/request", async (req, res) => {
 //id message
 router.get("/profile/:requestId/accept", async (req, res) => {
 
-    //check user(token)
+    //check (token)
     const token = req.header("Authorization")
     if (!token) return res.status(401).json("token is missing")
 
