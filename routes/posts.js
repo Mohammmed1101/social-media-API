@@ -357,28 +357,24 @@ router.delete("/:postId/comments/:commentId", async (req, res) => {
         const user = await User.findById(userId).select("-password")
         if (!user) return res.status(404).json("user not found")
 
-        //check(validate) id
+        //check id
         const postId = req.params.postId
         if (!mongoose.Types.ObjectId.isValid(postId))
             return res.status(400).send("The path is not valid object id")
 
-        //check(validate) id
+        //check id
         const commentId = req.params.commentId
         if (!mongoose.Types.ObjectId.isValid(commentId))
             return res.status(400).send("The path is not valid object id")
 
-        // //validate
-        // const result = commentJoi.validate(req.body)
-        // if (result.error) return res.status(404).json(result.error.details[0].message)
-
         let post = await Post.findById(req.params._id)
         if (post) return res.status(404).json("post not found")
 
-        const { comment } = req.body
+     
         const commentFound = await Comment.findById(req.params.commentId)
         if (!commentFound) return res.status(404).json("comment not found")
 
-        const userComment = await Comment.findById(req.userId)
+        
         if (commentFound.owner != req.userId) return res.status(403).json("unauthorized action")
         await Post.findByIdAndUpdate(req.params.postId, { $pull: { comments: commentFound._id } })
         await Comment.findByIdAndRemove(req.params.commentId)

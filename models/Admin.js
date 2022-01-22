@@ -18,7 +18,7 @@ const adminSchema = new mongoose.Schema({
 const signupJoi= (input) => Joi.object({
     firstName : Joi.string().regex(/^[,. a-zA-Z]+$/).alphanum().min(3).max(50).required(),
     lastName : Joi.string().regex(/^[,. a-zA-Z]+$/).alphanum().min(3).max(50).required(),
-    // avatar : Joi.string().dataUri().max(1000),
+    avatar : Joi.string().dataUri().max(1000),
     username : Joi.string().min(4).max(25).required(),
     email: Joi.string().email().required(),
     password: passwordComplexity({

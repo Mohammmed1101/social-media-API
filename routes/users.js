@@ -279,12 +279,12 @@ router.get("/profile", async (req, res) => {
 
         const user = await User.findById(req.userId).select("-password").populate("sent").populate({
             path: "receive",
-            select: "-poster_id"
+            select: "-sender_id"
         }).populate("favourite").populate("following").populate("followers").populate({
             path: "request"
             , populate: "receive_id",
             path: "request"
-            , populate: "response_id"
+            , populate: "sender_id"
         }).populate("friends").populate("posts")
         if (!user) return res.status(404).json("user not found")
         // console.log(user)

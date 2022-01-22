@@ -57,11 +57,7 @@ const userSchema = new mongoose.Schema({
     request : [{
         type : mongoose.Types.ObjectId,
         ref : "Request"
-    }],
-    role : {
-        type : String , 
-        default : "User"
-    }
+    }]
 
 }) 
 
@@ -78,7 +74,7 @@ const signupJoi= (input) => Joi.object({
         upperCase: 1,
         numeric: 1,
         symbol: 1,
-        requirementCount: 2,
+        requirementCount: 3,
       })
 }).validate(input)
 

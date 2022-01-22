@@ -22,7 +22,7 @@ router.post("/profile/:id/message", async (req, res) => {
         const { message } = req.body
         const newMessage = new Message({
             message,
-            poster_id: req.userId,
+            sender_id: req.userId,
             receive_id: req.params.id
         })
         await newMessage.save()

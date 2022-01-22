@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
-const { Conversation } = require("../models/Conversation")
+const { Conversation, conversationJoi } = require("../models/Conversation")
 const { User } = require("../models/User")
 
 router.get("/profile/:id/directMessage", async (req, res) => {
@@ -40,9 +40,9 @@ router.post("/profile/:id/directMessage", async (req, res) => {
         const user = await User.findById(userId).select("-password")
         if (!user) return res.status(404).json("user not found")
         req.userId = userId
-        // //validate
-        // const result = conversationJoi(req.body)
-        // if (result.error) return res.status(400).json(result.error.details[0].message)
+        //validate
+        const result = conversationJoi.validate(req.body)
+        if (result.error) return res.status(400).json(result.error.details[0].message)
 
         const { message } = req.body
         const newMessage = new Conversation({

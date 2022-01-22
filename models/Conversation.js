@@ -20,11 +20,11 @@ const conversationSchema = new mongoose.Schema({
 })
 
 const conversationJoi = Joi.object({
-    messaage : Joi.string().max(1000).required(),
+    message : Joi.string().max(1000).required(),
 
 })
 
 const Conversation = mongoose.model("Conversation" , conversationSchema)
 
 module.exports.Conversation = Conversation
-module.exports.conversationSchema = conversationSchema
+module.exports.conversationJoi = conversationJoi
