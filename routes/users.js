@@ -380,7 +380,7 @@ router.get("/profile/:id/follow", async (req, res) => {
 
         await User.findByIdAndUpdate(req.params.id, { $addToSet: { followers: req.userId } })
         await User.findByIdAndUpdate(req.userId, { $addToSet: { following: req.params.id } })
-        res.json("added follow")
+        res.json("follow")
 
 
     } catch (error) {
@@ -392,10 +392,10 @@ router.get("/profile/:id/follow", async (req, res) => {
 //unfollow
 router.get("/profile/:id/unfollow", async (req, res) => {
     try {
-        // //check id
-        // const id = req.params.id
-        // if (!mongoose.Types.ObjectId.isValid(id))
-        // return res.status(400).send("The path is not valid")
+        //check id
+        const id = req.params.id
+        if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(400).send("The path is not valid")
 
         //check token 
         const token = req.header("Authorization")
@@ -412,7 +412,7 @@ router.get("/profile/:id/unfollow", async (req, res) => {
 
         await User.findByIdAndUpdate(req.params.id, { $pull: { followers: req.userId } })
         await User.findByIdAndUpdate(req.userId, { $pull: { following: req.params.id } })
-        res.json("delete follow")
+        res.json("Unfollow")
 
 
     } catch (error) {
