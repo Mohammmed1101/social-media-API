@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         default : false,
     }, 
     password:String,
-    comments : [{
+    comment : [{
         type : mongoose.Types.ObjectId , 
         ref : "Comment"
     }] , 
@@ -94,7 +94,7 @@ const loginJoi =  (input) => Joi.object({
 }).validate(input)
 
 const resetPassJoi= (input) => Joi.object({
-    username : Joi.string().regex(/^[_.a-zA-Z0-9]+$/).min(4).max(25),
+    username : Joi.string().regex(/^[a-zA-Z0-9._]+$/).min(4).max(25),
     email: Joi.string().email(),
 }).validate(input)
 
