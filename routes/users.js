@@ -188,7 +188,7 @@ router.post("/signup", async (req, res) => {
                                                 <td bgcolor="#ffffff" align="center" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                                                     <table border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
-                                                            <td align="center" style="border-radius: 3px;" bgcolor="#000B49"><a href="http://localhost:3000/email_verified/${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #000B49; display: inline-block;">Confirm Account</a></td>
+                                                            <td align="center" style="border-radius: 3px;" bgcolor="#000B49"><a href="https://social-media-front-end-1.herokuapp.com/email_verified/${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #000B49; display: inline-block;">Confirm Account</a></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -339,7 +339,7 @@ router.get("/profile/:username", async (req, res) => {
         const username = req.params.username
 
         const token = req.header("Authorization")
-      
+
         if (token) {
             const decryptToken = jwt.verify(token, process.env.JWT_SECRET_KEY)
             const userId = decryptToken.id
@@ -352,7 +352,7 @@ router.get("/profile/:username", async (req, res) => {
         const isFollower = user.followers.find(f => f._id == req.userId)
         if ((!token || !isFollower) && req.userId != user._id) user._doc.posts = user._doc.posts.filter(p => p.type === 'Public')
 
-       
+
         res.json(user)
     } catch (error) {
         console.log(error.message)
@@ -396,7 +396,7 @@ router.get("/profile/:id/unfollow", async (req, res) => {
         //check id
         const id = req.params.id
         if (!mongoose.Types.ObjectId.isValid(id))
-        return res.status(400).send("The path is not valid")
+            return res.status(400).send("The path is not valid")
 
         //check token 
         const token = req.header("Authorization")
@@ -581,7 +581,7 @@ router.post("/forgot-password", async (req, res) => {
                                                 <td bgcolor="#ffffff" align="center" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                                                     <table border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
-                                                            <td align="center" style="border-radius: 3px;" bgcolor="#000B49"><a href="http://localhost:3000/reset-password/${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #000B49; display: inline-block;"> Reset Password</a></td>
+                                                            <td align="center" style="border-radius: 3px;" bgcolor="#000B49"><a href="https://social-media-front-end-1.herokuapp.com/reset-password/${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #000B49; display: inline-block;"> Reset Password</a></td>
                                                         </tr>
                                                     </table>
                                                 </td>
